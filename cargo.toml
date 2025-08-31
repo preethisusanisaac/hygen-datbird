@@ -1,0 +1,10 @@
+[package]
+name = "hello_world"
+version = "0.1.0"
+edition = "2021"
+
+# Optional: add metadata like authors, description
+# authors = ["Your Name <you@example.com>"]
+# description = "A simple hello world in Rust"
+
+[dependencies]
