@@ -20,6 +20,14 @@ def get_db():
 
 
 def init_db():
+    """Initialize database schema and tables"""
+    from sqlalchemy import text
+    
+    # Create schema first
+    with engine.connect() as conn:
+        conn.execute(text("CREATE SCHEMA IF NOT EXISTS hygen_re"))
+        conn.commit()
+    
     # Import models so they register with Base
     from app.models import builder, project, lead  # noqa: F401
     Base.metadata.create_all(bind=engine)
