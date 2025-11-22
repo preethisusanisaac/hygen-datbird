@@ -35,8 +35,13 @@ def init_db():
                 conn.execute(text("CREATE SCHEMA IF NOT EXISTS hygen_re"))
                 conn.commit()
             
-            # Import models so they register with Base
-            from app.models import builder, project, lead  # noqa: F401
+            # Import models in correct order (parent tables before child tables with foreign keys)
+            # This ensures tables are registered with Base in dependency order
+            from app.models import builder  # noqa: F401
+            from app.models import project  # noqa: F401 (depends on builder)
+            from app.models import lead  # noqa: F401 (depends on project)
+            
+            # Create all tables - SQLAlchemy will respect the order of dependencies
             Base.metadata.create_all(bind=engine)
             
             print("✅ Database initialized successfully")

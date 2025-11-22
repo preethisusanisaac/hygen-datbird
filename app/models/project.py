@@ -7,7 +7,7 @@ class Project(Base):
     __tablename__ = "projects"
     __table_args__ = {"schema": "hygen_re"}
     id = Column(BigInteger, primary_key=True, index=True)
-    builder_id = Column(BigInteger, ForeignKey("builders.id", ondelete="CASCADE"), nullable=False)
+    builder_id = Column(BigInteger, ForeignKey("hygen_re.builders.id", ondelete="CASCADE"), nullable=False)
     name = Column(Text, nullable=False)
     project_type = Column(Text, nullable=False)  # 'plot','flat','villa', etc.
     location = Column(Text)

@@ -17,7 +17,7 @@ class Lead(Base):
     __tablename__ = "leads"
     __table_args__ = {"schema": "hygen_re"}
     id = Column(BigInteger, primary_key=True, index=True)
-    project_id = Column(BigInteger, ForeignKey("projects.id", ondelete="CASCADE"), nullable=False)
+    project_id = Column(BigInteger, ForeignKey("hygen_re.projects.id", ondelete="CASCADE"), nullable=False)
     wa_phone = Column(Text, nullable=False)
     name = Column(Text)
     budget_min = Column(Numeric)
