@@ -1,0 +1,20 @@
+[theme]
+# Primary brand color - Green
+primaryColor = "#046307"
+
+# Background colors
+backgroundColor = "#F5F9F6"
+secondaryBackgroundColor = "#FFFFFF"
+
+# Text colors
+textColor = "#0D1B0D"
+
+# Font
+font = "sans serif"
+
+[server]
+headless = true
+enableXsrfProtection = false
+
+[browser]
+gatherUsageStats = false
