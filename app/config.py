@@ -11,6 +11,15 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
+    
+    @property
+    def database_url_with_driver(self) -> str:
+        """Ensure DATABASE_URL has the correct driver for SQLAlchemy"""
+        url = self.DATABASE_URL
+        # If URL starts with postgresql:// (Render format), convert to postgresql+psycopg2://
+        if url.startswith("postgresql://") and not url.startswith("postgresql+psycopg2://"):
+            url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
+        return url
 
 
 settings = Settings()
