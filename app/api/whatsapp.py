@@ -1,5 +1,5 @@
 # app/api/whatsapp.py
-from fastapi import APIRouter, Depends, Request, HTTPException
+from fastapi import APIRouter, Depends, Request, HTTPException, Query
 from sqlalchemy.orm import Session
 import httpx
 import logging
@@ -14,9 +14,9 @@ router = APIRouter()
 
 @router.get("/whatsapp")
 async def verify_webhook(
-    hub_mode: str,
-    hub_challenge: str,
-    hub_verify_token: str,
+    hub_mode: str = Query(..., alias="hub.mode"),
+    hub_challenge: str = Query(..., alias="hub.challenge"),
+    hub_verify_token: str = Query(..., alias="hub.verify_token"),
 ):
     if hub_mode == "subscribe" and hub_verify_token == settings.WHATSAPP_VERIFY_TOKEN:
         return int(hub_challenge)
